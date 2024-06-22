@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'terms_page.dart'; // TermsPage 파일 임포트
+import 'signup_page.dart'; // SignupPage 파일 임포트
 import 'main_page.dart'; // MainPage 파일 임포트
 
-class SignupPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  bool _isAutoLogin = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +21,7 @@ class SignupPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/signup_logo.png', // 회원가입 로고 이미지 경로
+                'assets/logo.png', // 로고 이미지 경로
                 height: 200,
               ),
               SizedBox(height: 20),
@@ -49,17 +56,40 @@ class SignupPage extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
               ),
               SizedBox(height: 20),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TermsPage()),
-                  );
-                },
-                child: Text(
-                  '이용약관',
-                  style: TextStyle(color: Colors.grey),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: _isAutoLogin,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            _isAutoLogin = value ?? false;
+                          });
+                        },
+                        checkColor: Colors.black,
+                        fillColor: MaterialStateProperty.all(Colors.white),
+                      ),
+                      Text(
+                        '자동 로그인',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ],
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignupPage()),
+                      );
+                    },
+                    child: Text(
+                      '회원가입',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 20),
               ElevatedButton(
@@ -78,7 +108,7 @@ class SignupPage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 80.0),
                 ),
                 child: Text(
-                  '회원가입',
+                  '로그인',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
