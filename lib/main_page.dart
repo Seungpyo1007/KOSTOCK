@@ -18,6 +18,89 @@ class MainPage extends StatelessWidget {
           ),
         ],
       ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.black,
+              ),
+              child: Text(
+                '메뉴',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              title: Text('국내주식', style: TextStyle(color: Colors.black)),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('해외주식(현재 미지원)', style: TextStyle(color: Colors.black)),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            Divider(color: Colors.grey),
+            ListTile(
+              title: Text('뉴스', style: TextStyle(color: Colors.black)),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            Divider(color: Colors.grey),
+            ListTile(
+              title: Text('관심종목', style: TextStyle(color: Colors.black)),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('관심종목 추가', style: TextStyle(color: Colors.black)),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            Divider(color: Colors.grey),
+            ListTile(
+              title: Text('주식주문', style: TextStyle(color: Colors.black)),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('자동감시주문', style: TextStyle(color: Colors.black)),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            Divider(color: Colors.grey),
+            ListTile(
+              title: Text('MY자산', style: TextStyle(color: Colors.black)),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('MY페이지', style: TextStyle(color: Colors.black)),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('로그아웃', style: TextStyle(color: Colors.black)),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -177,27 +260,52 @@ class MainPage extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
         unselectedItemColor: Colors.grey,
-        selectedItemColor: Colors.white,
+        selectedItemColor: Colors.grey,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.menu),
-            label: '메뉴',
+            icon: IconButton(
+              icon: Icon(Icons.menu, color: Colors.white),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            ),
+            label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.article),
-            label: '뉴스',
+            icon: IconButton(
+              icon: Icon(Icons.article, color: Colors.grey),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            ),
+            label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.star),
-            label: '관심종목',
+            icon: IconButton(
+              icon: Icon(Icons.star, color: Colors.grey),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            ),
+            label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.trending_up),
-            label: '주식 주문',
+            icon: IconButton(
+              icon: Icon(Icons.trending_up, color: Colors.grey),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            ),
+            label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_balance_wallet),
-            label: 'MY 자산',
+            icon: IconButton(
+              icon: Icon(Icons.account_balance_wallet, color: Colors.grey),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            ),
+            label: '',
           ),
         ],
       ),

@@ -93,22 +93,6 @@ class _TermsPageState extends State<TermsPage> {
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Checkbox(
-                  value: _isAgreed,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      _isAgreed = value ?? false;
-                    });
-                  },
-                  checkColor: Colors.black,
-                  fillColor: MaterialStateProperty.all(Colors.white),
-                ),
-                Text(
-                  '약관에 동의합니다',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ],
             ),
             Center(
               child: ElevatedButton(
