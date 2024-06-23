@@ -7,20 +7,26 @@ class MyAssetsPage extends StatelessWidget {
       length: 2,
       child: Scaffold(
         backgroundColor: Colors.black,
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: TabBar(
-            indicatorColor: Colors.red,
-            tabs: [
-              Tab(text: 'MY 자산'),
-              Tab(text: 'MY 페이지'),
-            ],
-          ),
-        ),
-        body: TabBarView(
+        body: Column(
           children: [
-            MyAssetsTab(),
-            MyPageTab(),
+            Container(
+              color: Colors.black,
+              child: TabBar(
+                indicatorColor: Colors.red,
+                tabs: [
+                  Tab(text: 'MY 자산'),
+                  Tab(text: 'MY 페이지'),
+                ],
+              ),
+            ),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  MyAssetsTab(),
+                  MyPageTab(),
+                ],
+              ),
+            ),
           ],
         ),
       ),
