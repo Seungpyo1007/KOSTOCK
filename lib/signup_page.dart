@@ -1,47 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'terms_page.dart';
 import 'main_page.dart';
-import 'signup_page.dart';
 
-class LoginPage extends StatefulWidget {
+class SignupPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignupPageState createState() => _SignupPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignupPageState extends State<SignupPage> {
   final _formKey = GlobalKey<FormState>();
   final _idController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _isAutoLogin = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadSavedCredentials();
-  }
-
-  Future<void> _loadSavedCredentials() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _idController.text = prefs.getString('savedId') ?? '';
-      _passwordController.text = prefs.getString('savedPassword') ?? '';
-      _isAutoLogin = prefs.getBool('isAutoLogin') ?? false;
-    });
-  }
-
-  Future<void> _saveCredentials() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('savedId', _idController.text);
-    await prefs.setString('savedPassword', _passwordController.text);
-    await prefs.setBool('isAutoLogin', _isAutoLogin);
-  }
-
-  Future<void> _clearCredentials() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('savedId');
-    await prefs.remove('savedPassword');
-    await prefs.remove('isAutoLogin');
-  }
+  bool _isAgreed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/logo.png', // 로고 이미지 경로
+                  'assets/signup_logo.png', // 회원가입 로고 이미지 경로
                   height: 200,
                 ),
                 SizedBox(height: 20),
@@ -105,56 +75,52 @@ class _LoginPageState extends State<LoginPage> {
                   },
                 ),
                 SizedBox(height: 20),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => TermsPage()),
+                    );
+                  },
+                  child: Text(
+                    '이용약관',
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ),
+                SizedBox(height: 20),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: _isAutoLogin,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              _isAutoLogin = value ?? false;
-                              if (!_isAutoLogin) {
-                                _clearCredentials();
-                              }
-                            });
-                          },
-                          checkColor: Colors.black,
-                          fillColor: MaterialStateProperty.all(Colors.white),
-                        ),
-                        Text(
-                          '자동 로그인',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SignupPage()),
-                        );
+                    Checkbox(
+                      value: _isAgreed,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          _isAgreed = value ?? false;
+                        });
                       },
-                      child: Text(
-                        '회원가입',
-                        style: TextStyle(color: Colors.white),
-                      ),
+                      checkColor: Colors.black,
+                      fillColor: MaterialStateProperty.all(Colors.white),
+                    ),
+                    Text(
+                      '약관에 동의합니다',
+                      style: TextStyle(color: Colors.white),
                     ),
                   ],
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      if (_isAutoLogin) {
-                        await _saveCredentials();
-                      } else {
-                        await _clearCredentials();
-                      }
+                  onPressed: () {
+                    if (_formKey.currentState!.validate() && _isAgreed) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => MainPage()),
+                      );
+                    } else if (!_isAgreed) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('이용약관에 동의해주세요'),
+                          backgroundColor: Colors.red,
+                        ),
                       );
                     }
                   },
@@ -167,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                     padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 80.0),
                   ),
                   child: Text(
-                    '로그인',
+                    '회원가입',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
