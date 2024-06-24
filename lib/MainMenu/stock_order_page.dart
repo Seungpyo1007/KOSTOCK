@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class StockOrderPage extends StatelessWidget {
+  const StockOrderPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -11,7 +13,7 @@ class StockOrderPage extends StatelessWidget {
           children: [
             Container(
               color: Colors.black,
-              child: TabBar(
+              child: const TabBar(
                 indicatorColor: Colors.red,
                 tabs: [
                   Tab(text: '주식주문'),
@@ -19,7 +21,7 @@ class StockOrderPage extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
+            const Expanded(
               child: TabBarView(
                 children: [
                   StockOrderTab(),
@@ -35,6 +37,8 @@ class StockOrderPage extends StatelessWidget {
 }
 
 class StockOrderTab extends StatelessWidget {
+  const StockOrderTab({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -47,7 +51,7 @@ class StockOrderTab extends StatelessWidget {
               dropdownColor: Colors.grey[850],
               decoration: InputDecoration(
                 hintText: '종목명',
-                hintStyle: TextStyle(color: Colors.grey),
+                hintStyle: const TextStyle(color: Colors.grey),
                 filled: true,
                 fillColor: Colors.grey[850],
                 border: OutlineInputBorder(
@@ -59,16 +63,16 @@ class StockOrderTab extends StatelessWidget {
               items: <String>['삼성전자', '한화오션'].map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
-                  child: Text(value, style: TextStyle(color: Colors.white)),
+                  child: Text(value, style: const TextStyle(color: Colors.white)),
                 );
               }).toList(),
               onChanged: (_) {},
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextField(
               decoration: InputDecoration(
                 hintText: '계좌번호',
-                hintStyle: TextStyle(color: Colors.grey),
+                hintStyle: const TextStyle(color: Colors.grey),
                 filled: true,
                 fillColor: Colors.grey[850],
                 border: OutlineInputBorder(
@@ -76,11 +80,11 @@ class StockOrderTab extends StatelessWidget {
                   borderSide: BorderSide.none,
                 ),
               ),
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.grey[850],
                 borderRadius: BorderRadius.circular(10),
@@ -88,12 +92,12 @@ class StockOrderTab extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('매수', style: TextStyle(color: Colors.white, fontSize: 18)),
-                  SizedBox(height: 10),
+                  const Text('매수', style: TextStyle(color: Colors.white, fontSize: 18)),
+                  const SizedBox(height: 10),
                   TextField(
                     decoration: InputDecoration(
                       hintText: '가격 입력',
-                      hintStyle: TextStyle(color: Colors.grey),
+                      hintStyle: const TextStyle(color: Colors.grey),
                       filled: true,
                       fillColor: Colors.grey[850],
                       border: OutlineInputBorder(
@@ -101,13 +105,13 @@ class StockOrderTab extends StatelessWidget {
                         borderSide: BorderSide.none,
                       ),
                     ),
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   TextField(
                     decoration: InputDecoration(
                       hintText: '수량 입력',
-                      hintStyle: TextStyle(color: Colors.grey),
+                      hintStyle: const TextStyle(color: Colors.grey),
                       filled: true,
                       fillColor: Colors.grey[850],
                       border: OutlineInputBorder(
@@ -115,9 +119,9 @@ class StockOrderTab extends StatelessWidget {
                         borderSide: BorderSide.none,
                       ),
                     ),
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
@@ -125,9 +129,9 @@ class StockOrderTab extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      padding: EdgeInsets.symmetric(vertical: 16),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         '현금매수',
                         style: TextStyle(color: Colors.white),
@@ -137,9 +141,9 @@ class StockOrderTab extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.grey[850],
                 borderRadius: BorderRadius.circular(10),
@@ -147,12 +151,12 @@ class StockOrderTab extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('매도', style: TextStyle(color: Colors.white, fontSize: 18)),
-                  SizedBox(height: 10),
+                  const Text('매도', style: TextStyle(color: Colors.white, fontSize: 18)),
+                  const SizedBox(height: 10),
                   TextField(
                     decoration: InputDecoration(
                       hintText: '가격 입력',
-                      hintStyle: TextStyle(color: Colors.grey),
+                      hintStyle: const TextStyle(color: Colors.grey),
                       filled: true,
                       fillColor: Colors.grey[850],
                       border: OutlineInputBorder(
@@ -160,13 +164,13 @@ class StockOrderTab extends StatelessWidget {
                         borderSide: BorderSide.none,
                       ),
                     ),
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   TextField(
                     decoration: InputDecoration(
                       hintText: '수량 입력',
-                      hintStyle: TextStyle(color: Colors.grey),
+                      hintStyle: const TextStyle(color: Colors.grey),
                       filled: true,
                       fillColor: Colors.grey[850],
                       border: OutlineInputBorder(
@@ -174,9 +178,9 @@ class StockOrderTab extends StatelessWidget {
                         borderSide: BorderSide.none,
                       ),
                     ),
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
@@ -184,9 +188,9 @@ class StockOrderTab extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      padding: EdgeInsets.symmetric(vertical: 16),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         '현금매도',
                         style: TextStyle(color: Colors.white),
@@ -204,6 +208,8 @@ class StockOrderTab extends StatelessWidget {
 }
 
 class AutoOrderTab extends StatelessWidget {
+  const AutoOrderTab({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -215,12 +221,12 @@ class AutoOrderTab extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('유의', style: TextStyle(color: Colors.white)),
+                const Text('유의', style: TextStyle(color: Colors.white)),
                 Switch(value: false, onChanged: (value) {}, activeColor: Colors.red),
-                Text('전체감시', style: TextStyle(color: Colors.white)),
+                const Text('전체감시', style: TextStyle(color: Colors.white)),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
@@ -228,22 +234,22 @@ class AutoOrderTab extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                padding: EdgeInsets.symmetric(vertical: 16),
+                padding: const EdgeInsets.symmetric(vertical: 16),
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   '매도조건 추가',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('보유종목 매도 0건 자동감시 중', style: TextStyle(color: Colors.grey)),
+                const Text('보유종목 매도 0건 자동감시 중', style: TextStyle(color: Colors.grey)),
                 IconButton(
-                  icon: Icon(Icons.refresh, color: Colors.red),
+                  icon: const Icon(Icons.refresh, color: Colors.red),
                   onPressed: () {},
                 ),
               ],

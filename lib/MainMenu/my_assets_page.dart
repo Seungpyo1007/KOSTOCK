@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MyAssetsPage extends StatelessWidget {
+  const MyAssetsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -11,7 +13,7 @@ class MyAssetsPage extends StatelessWidget {
           children: [
             Container(
               color: Colors.black,
-              child: TabBar(
+              child: const TabBar(
                 indicatorColor: Colors.red,
                 tabs: [
                   Tab(text: 'MY 자산'),
@@ -19,7 +21,7 @@ class MyAssetsPage extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
+            const Expanded(
               child: TabBarView(
                 children: [
                   MyAssetsTab(),
@@ -35,6 +37,8 @@ class MyAssetsPage extends StatelessWidget {
 }
 
 class MyAssetsTab extends StatelessWidget {
+  const MyAssetsTab({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -46,7 +50,7 @@ class MyAssetsTab extends StatelessWidget {
             TextField(
               decoration: InputDecoration(
                 hintText: '계좌번호',
-                hintStyle: TextStyle(color: Colors.grey),
+                hintStyle: const TextStyle(color: Colors.grey),
                 filled: true,
                 fillColor: Colors.grey[850],
                 border: OutlineInputBorder(
@@ -54,16 +58,16 @@ class MyAssetsTab extends StatelessWidget {
                   borderSide: BorderSide.none,
                 ),
               ),
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.grey[850],
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Column(
+              child: const Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -96,14 +100,14 @@ class MyAssetsTab extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.grey[850],
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Column(
+              child: const Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -151,6 +155,8 @@ class MyAssetsTab extends StatelessWidget {
 }
 
 class MyPageTab extends StatelessWidget {
+  const MyPageTab({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -159,27 +165,27 @@ class MyPageTab extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 40,
               backgroundImage: AssetImage('assets/profile_image.png'), // 이미지 경로
             ),
-            SizedBox(height: 10),
-            Text(
+            const SizedBox(height: 10),
+            const Text(
               'Z | 존_DY',
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
-            Text(
+            const Text(
               '개인회원/일반 투자자',
               style: TextStyle(color: Colors.grey, fontSize: 14),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.grey[850],
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Column(
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('기본정보', style: TextStyle(color: Colors.white, fontSize: 18)),
@@ -222,10 +228,10 @@ class MyPageTab extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20),
-            Text('문의', style: TextStyle(color: Colors.white)),
-            SizedBox(height: 10),
-            Text('탈퇴하기', style: TextStyle(color: Colors.red)),
+            const SizedBox(height: 20),
+            const Text('문의', style: TextStyle(color: Colors.white)),
+            const SizedBox(height: 10),
+            const Text('탈퇴하기', style: TextStyle(color: Colors.red)),
           ],
         ),
       ),

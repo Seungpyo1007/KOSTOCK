@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'terms_page.dart';
-import 'main_page.dart';
+import '../terms_page.dart';
+import '../main_page.dart';
 
 class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
+
   @override
   _SignupPageState createState() => _SignupPageState();
 }
@@ -29,13 +31,13 @@ class _SignupPageState extends State<SignupPage> {
                   'assets/signup_logo.png', // 회원가입 로고 이미지 경로
                   height: 200,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextFormField(
                   controller: _idController,
                   decoration: InputDecoration(
                     hintText: '아이디',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    prefixIcon: Icon(Icons.person, color: Colors.grey),
+                    hintStyle: const TextStyle(color: Colors.grey),
+                    prefixIcon: const Icon(Icons.person, color: Colors.grey),
                     filled: true,
                     fillColor: Colors.grey[850],
                     border: OutlineInputBorder(
@@ -43,7 +45,7 @@ class _SignupPageState extends State<SignupPage> {
                       borderSide: BorderSide.none,
                     ),
                   ),
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return '아이디를 입력해주세요';
@@ -51,14 +53,14 @@ class _SignupPageState extends State<SignupPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextFormField(
                   controller: _passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: '비밀번호',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    prefixIcon: Icon(Icons.lock, color: Colors.grey),
+                    hintStyle: const TextStyle(color: Colors.grey),
+                    prefixIcon: const Icon(Icons.lock, color: Colors.grey),
                     filled: true,
                     fillColor: Colors.grey[850],
                     border: OutlineInputBorder(
@@ -66,7 +68,7 @@ class _SignupPageState extends State<SignupPage> {
                       borderSide: BorderSide.none,
                     ),
                   ),
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return '비밀번호를 입력해주세요';
@@ -74,7 +76,7 @@ class _SignupPageState extends State<SignupPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextButton(
                   onPressed: () {
                     Navigator.push(
@@ -82,12 +84,12 @@ class _SignupPageState extends State<SignupPage> {
                       MaterialPageRoute(builder: (context) => TermsPage()),
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     '이용약관',
                     style: TextStyle(color: Colors.grey),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -101,13 +103,13 @@ class _SignupPageState extends State<SignupPage> {
                       checkColor: Colors.black,
                       fillColor: MaterialStateProperty.all(Colors.white),
                     ),
-                    Text(
+                    const Text(
                       '약관에 동의합니다',
                       style: TextStyle(color: Colors.white),
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate() && _isAgreed) {
@@ -117,7 +119,7 @@ class _SignupPageState extends State<SignupPage> {
                       );
                     } else if (!_isAgreed) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text('이용약관에 동의해주세요'),
                           backgroundColor: Colors.red,
                         ),
@@ -128,11 +130,11 @@ class _SignupPageState extends State<SignupPage> {
                     backgroundColor: Colors.grey[850],
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
-                      side: BorderSide(color: Colors.white),
+                      side: const BorderSide(color: Colors.white),
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 80.0),
+                    padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 80.0),
                   ),
-                  child: Text(
+                  child: const Text(
                     '회원가입',
                     style: TextStyle(color: Colors.white),
                   ),

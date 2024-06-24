@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class NewsPage extends StatelessWidget {
+  const NewsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return const SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -39,12 +41,12 @@ class NewsItem extends StatelessWidget {
   final String title;
   final String imagePath;
 
-  NewsItem({required this.title, required this.imagePath});
+  const NewsItem({super.key, required this.title, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.grey[850],
         borderRadius: BorderRadius.circular(10),
@@ -54,9 +56,9 @@ class NewsItem extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Image.asset(imagePath),
         ],
       ),

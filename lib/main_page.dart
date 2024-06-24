@@ -7,19 +7,23 @@ import 'MainMenu/my_assets_page.dart';
 import 'MainMenu/current_stock_page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: MainPage(),
     );
   }
 }
 
 class MainPage extends StatefulWidget {
+  const MainPage({super.key});
+
   @override
   _MainPageState createState() => _MainPageState();
 }
@@ -33,13 +37,13 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  List<Widget> _pages = [
-    HomePage(),
-    NewsPage(),
-    InterestPage(),
-    StockOrderPage(),
-    MyAssetsPage(),
-    CurrentStockPage(),
+  final List<Widget> _pages = [
+    const HomePage(),
+    const NewsPage(),
+    const InterestPage(),
+    const StockOrderPage(),
+    const MyAssetsPage(),
+    const CurrentStockPage(),
   ];
 
   @override
@@ -54,11 +58,11 @@ class _MainPageState extends State<MainPage> {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.notifications, color: Colors.white),
+            icon: const Icon(Icons.notifications, color: Colors.white),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NotificationPage()),
+                MaterialPageRoute(builder: (context) => const NotificationPage()),
               );
             },
           ),
@@ -75,7 +79,7 @@ class _MainPageState extends State<MainPage> {
         selectedItemColor: Colors.red,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.menu, color: Colors.red),
             label: '메뉴',
@@ -107,13 +111,15 @@ class _MainPageState extends State<MainPage> {
 }
 
 class NotificationPage extends StatelessWidget {
+  const NotificationPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text('최근 알림 내역', style: TextStyle(color: Colors.white)),
+        title: const Text('최근 알림 내역', style: TextStyle(color: Colors.white)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -122,7 +128,7 @@ class NotificationPage extends StatelessWidget {
             color: Colors.grey[850],
             borderRadius: BorderRadius.circular(10),
           ),
-          child: ListTile(
+          child: const ListTile(
             leading: Icon(Icons.notifications, color: Colors.red),
             title: Text('KOSTOCK 가입을 축하드립니다!', style: TextStyle(color: Colors.white)),
             subtitle: Text('앞으로 KOSTOCK에서 제공하는 다양한 혜택을 받아보세요.', style: TextStyle(color: Colors.grey)),

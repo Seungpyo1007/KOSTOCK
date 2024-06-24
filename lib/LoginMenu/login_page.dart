@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'main_page.dart';
+import '../main_page.dart';
 import 'signup_page.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -29,13 +31,13 @@ class _LoginPageState extends State<LoginPage> {
                   'assets/logo.png', // 로고 이미지 경로
                   height: 200,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextFormField(
                   controller: _idController,
                   decoration: InputDecoration(
                     hintText: '아이디',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    prefixIcon: Icon(Icons.person, color: Colors.grey),
+                    hintStyle: const TextStyle(color: Colors.grey),
+                    prefixIcon: const Icon(Icons.person, color: Colors.grey),
                     filled: true,
                     fillColor: Colors.grey[850],
                     border: OutlineInputBorder(
@@ -43,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                       borderSide: BorderSide.none,
                     ),
                   ),
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return '아이디를 입력해주세요';
@@ -51,14 +53,14 @@ class _LoginPageState extends State<LoginPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextFormField(
                   controller: _passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: '비밀번호',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    prefixIcon: Icon(Icons.lock, color: Colors.grey),
+                    hintStyle: const TextStyle(color: Colors.grey),
+                    prefixIcon: const Icon(Icons.lock, color: Colors.grey),
                     filled: true,
                     fillColor: Colors.grey[850],
                     border: OutlineInputBorder(
@@ -66,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                       borderSide: BorderSide.none,
                     ),
                   ),
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return '비밀번호를 입력해주세요';
@@ -74,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -90,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                           checkColor: Colors.black,
                           fillColor: MaterialStateProperty.all(Colors.white),
                         ),
-                        Text(
+                        const Text(
                           '자동 로그인',
                           style: TextStyle(color: Colors.white),
                         ),
@@ -100,17 +102,17 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => SignupPage()),
+                          MaterialPageRoute(builder: (context) => const SignupPage()),
                         );
                       },
-                      child: Text(
+                      child: const Text(
                         '회원가입',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
@@ -124,11 +126,11 @@ class _LoginPageState extends State<LoginPage> {
                     backgroundColor: Colors.grey[850],
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
-                      side: BorderSide(color: Colors.white),
+                      side: const BorderSide(color: Colors.white),
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 80.0),
+                    padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 80.0),
                   ),
-                  child: Text(
+                  child: const Text(
                     '로그인',
                     style: TextStyle(color: Colors.white),
                   ),
