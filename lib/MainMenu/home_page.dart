@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'current_stock_page.dart';
 import 'news_page.dart';
 import 'interest_page.dart';
-import '../xs_chatbot.dart';
+import '../BotSetting/xs_chatbot.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
