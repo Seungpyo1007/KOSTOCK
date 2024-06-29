@@ -15,7 +15,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final String _apiKey = 'YOUR_API_KEY_HERE'; // 여기에 API 키를 하드코딩합니다.
+  final String _apiKey = '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'; // 여기에 API 키를 하드코딩합니다.
 
   @override
   Widget build(BuildContext context) {
