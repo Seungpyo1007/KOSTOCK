@@ -53,7 +53,7 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: Image.asset(
-          'assets/logo.png',
+          'assets/main_logo.png',
           height: 40,
         ),
         actions: [
