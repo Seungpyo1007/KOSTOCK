@@ -1,36 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'LoginMenu/login_page.dart';
+import 'MainMenu/home_page.dart';
 import 'BotSetting/xs_chatbot.dart';
-import 'BotSetting/ApiProvider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  final String _apiKey = ''; // 여기에 API 키를 하드코딩합니다.
-
-  @override
   Widget build(BuildContext context) {
-    return ApiProvider(
-      apiKey: _apiKey,
-      child: MaterialApp(
-        title: 'Flutter ChatGPT',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const LoginPage(),
-        routes: {
-          '/chat': (context) => const XsChatbotPage(),
-        },
+    return MaterialApp(
+      title: 'Flutter ChatGPT',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      home: const LoginPage(),
+      routes: {
+        '/login': (context) => const LoginPage(),
+        '/home': (context) => const HomePage(),
+        '/chat': (context) => const XsChatbotPage(),
+      },
     );
   }
 }

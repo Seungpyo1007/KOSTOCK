@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class MyAssetsPage extends StatelessWidget {
   const MyAssetsPage({super.key});
@@ -159,6 +160,8 @@ class MyPageTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -170,13 +173,13 @@ class MyPageTab extends StatelessWidget {
               backgroundImage: AssetImage('assets/profile_image.png'), // 이미지 경로
             ),
             const SizedBox(height: 10),
-            const Text(
-              'Z | 존_DY',
-              style: TextStyle(color: Colors.white, fontSize: 20),
+            Text(
+              user?.displayName ?? 'Anonymous',
+              style: const TextStyle(color: Colors.white, fontSize: 20),
             ),
-            const Text(
-              '개인회원/일반 투자자',
-              style: TextStyle(color: Colors.grey, fontSize: 14),
+            Text(
+              user != null ? user.email ?? 'No Email' : 'No Email',
+              style: const TextStyle(color: Colors.grey, fontSize: 14),
             ),
             const SizedBox(height: 20),
             Container(
@@ -185,44 +188,30 @@ class MyPageTab extends StatelessWidget {
                 color: Colors.grey[850],
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('기본정보', style: TextStyle(color: Colors.white, fontSize: 18)),
-                  SizedBox(height: 10),
+                  const Text('기본정보', style: TextStyle(color: Colors.white, fontSize: 18)),
+                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('이름', style: TextStyle(color: Colors.grey)),
-                      Text('이선우', style: TextStyle(color: Colors.white)),
+                      const Text('이름', style: TextStyle(color: Colors.grey)),
+                      Text(user?.displayName ?? 'Anonymous', style: const TextStyle(color: Colors.white)),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('영문이름', style: TextStyle(color: Colors.grey)),
-                      Text('Lee Sunwoo', style: TextStyle(color: Colors.white)),
+                      const Text('이메일', style: TextStyle(color: Colors.grey)),
+                      Text(user != null ? user.email ?? 'No Email' : 'No Email', style: const TextStyle(color: Colors.white)),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('휴대폰번호', style: TextStyle(color: Colors.grey)),
-                      Text('010-****-9064', style: TextStyle(color: Colors.white)),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('이메일', style: TextStyle(color: Colors.grey)),
-                      Text('sdh230310@sdh.hs.kr', style: TextStyle(color: Colors.white)),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('계좌번호', style: TextStyle(color: Colors.grey)),
-                      Text('2913-****', style: TextStyle(color: Colors.white)),
+                      const Text('UID', style: TextStyle(color: Colors.grey)),
+                      Text(user?.uid ?? 'No UID', style: const TextStyle(color: Colors.white)),
                     ],
                   ),
                 ],

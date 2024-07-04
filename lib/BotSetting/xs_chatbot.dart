@@ -1,62 +1,55 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'ApiProvider.dart';
+import 'dart:convert';
 
 class XsChatbotPage extends StatefulWidget {
-  const XsChatbotPage({super.key});
+  const XsChatbotPage({Key? key}) : super(key: key);
 
   @override
   _XsChatbotPageState createState() => _XsChatbotPageState();
 }
 
 class _XsChatbotPageState extends State<XsChatbotPage> {
-  final List<Map<String, String>> _messages = [];
   final TextEditingController _controller = TextEditingController();
-  late String apiKey;
+  List<Map<String, String>> _chatHistory = []; // 채팅 내역을 저장할 리스트
+  bool _isLoading = false; // 데이터를 로딩 중인지 여부
+  String _errorMessage = ''; // 에러 메시지
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final apiProvider = ApiProvider.of(context);
-    apiKey = apiProvider?.apiKey ?? '';
-  }
-
-  Future<void> _sendMessage(String message) async {
+  Future<void> _sendQuery(String query) async {
     setState(() {
-      _messages.add({'role': 'user', 'content': message});
+      _isLoading = true; // 로딩 상태로 변경
     });
 
+    final url = Uri.parse('https://chatbot-oupmu.run.goorm.site/question');
     try {
-      final response = await _sendToApi(message);
-      setState(() {
-        _messages.add({'role': 'bot', 'content': response});
-      });
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'action': {'params': {'question': query}}}),
+      );
+
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body);
+        final botResponse =
+        responseData['template']['outputs'][0]['simpleText']['text'];
+        setState(() {
+          _chatHistory.insert(0, {'sender': 'User', 'message': query}); // 사용자 질문을 채팅 내역에 추가
+          _chatHistory.insert(0, {'sender': 'Bot', 'message': botResponse}); // 챗봇 응답을 채팅 내역에 추가
+          _errorMessage = ''; // 에러 메시지 초기화
+        });
+      } else {
+        setState(() {
+          _errorMessage = 'Error: ${response.statusCode}';
+        });
+      }
     } catch (e) {
       setState(() {
-        _messages.add({'role': 'bot', 'content': 'Failed to get response: $e'});
+        _errorMessage = 'Error: $e';
       });
-    }
-  }
-
-  Future<String> _sendToApi(String message) async {
-    final url = Uri.parse('https://api.openai.com/v1/engines/davinci-codex/completions');
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $apiKey',
-    };
-    final body = jsonEncode({
-      'prompt': message,
-      'max_tokens': 150,
-    });
-
-    final response = await http.post(url, headers: headers, body: body);
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      return data['choices'][0]['text'];
-    } else {
-      throw Exception('Failed to connect to GPT-3 API');
+    } finally {
+      setState(() {
+        _isLoading = false; // 로딩 상태 해제
+      });
     }
   }
 
@@ -64,47 +57,84 @@ class _XsChatbotPageState extends State<XsChatbotPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ChatGPT'),
+        title: Text('동엽쌤 Style Chatbot'),
       ),
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              itemCount: _messages.length,
-              itemBuilder: (context, index) {
-                final message = _messages[index];
-                return ListTile(
-                  title: Text(
-                    message['content']!,
-                    style: TextStyle(color: message['role'] == 'user' ? Colors.blue : Colors.red),
-                  ),
-                );
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
+            child: Stack(
               children: [
-                Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    decoration: const InputDecoration(
-                      hintText: 'Enter your message',
-                    ),
-                  ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.send),
-                  onPressed: () {
-                    if (_controller.text.isNotEmpty) {
-                      _sendMessage(_controller.text);
-                      _controller.clear();
-                    }
+                ListView.builder(
+                  reverse: true, // 채팅 내역을 역순으로 표시
+                  itemCount: _chatHistory.length,
+                  itemBuilder: (context, index) {
+                    final message = _chatHistory[index]['message'];
+                    final sender = _chatHistory[index]['sender'];
+                    final isUser = sender == 'User';
+
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      child: Align(
+                        alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
+                        child: Container(
+                          padding: EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: isUser ? Colors.blueAccent : Colors.grey[300],
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            message!,
+                            style: TextStyle(
+                              color: isUser ? Colors.white : Colors.black,
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
                   },
                 ),
+                if (_isLoading)
+                  Center(
+                    child: CircularProgressIndicator(),
+                  ),
               ],
             ),
+          ),
+          Divider(height: 1, color: Colors.grey), // 채팅 내역과 입력창 구분선
+          _buildInputField(),
+          if (_errorMessage.isNotEmpty) Text(_errorMessage, style: TextStyle(color: Colors.red)), // 에러 메시지 표시
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInputField() {
+    return Container(
+      margin: EdgeInsets.all(16),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              controller: _controller,
+              decoration: InputDecoration(
+                hintText: 'Type your message...',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                filled: true,
+                fillColor: Colors.grey[200],
+              ),
+            ),
+          ),
+          SizedBox(width: 16),
+          IconButton(
+            icon: Icon(Icons.send),
+            onPressed: () {
+              if (_controller.text.trim().isNotEmpty) {
+                _sendQuery(_controller.text);
+                _controller.clear();
+              }
+            },
           ),
         ],
       ),
