@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "754296171774",
+    "project_id": "kostock-project",
+    "storage_bucket": "kostock-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754296171774:android:af470b279c508697c3c9af",
+        "android_client_info": {
+          "package_name": "com.example.kostock"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_UWj_SeL74JTNcmzY93ZrnToZU3e_PGs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
