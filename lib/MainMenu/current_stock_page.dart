@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class CurrentStockPage extends StatefulWidget {
-  const CurrentStockPage({super.key});
+  const CurrentStockPage({Key? key}) : super(key: key);
 
   @override
   _CurrentStockPageState createState() => _CurrentStockPageState();
@@ -14,6 +14,8 @@ class _CurrentStockPageState extends State<CurrentStockPage> {
   Map<String, dynamic>? msftStockData;
   bool _isLoading = true;
   String _errorMessage = '';
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+  GlobalKey<RefreshIndicatorState>();
 
   @override
   void initState() {
@@ -22,7 +24,7 @@ class _CurrentStockPageState extends State<CurrentStockPage> {
   }
 
   Future<void> fetchStockData() async {
-    final apiKey = 'G33Z7BXADP0BNI70';
+    final apiKey = 'A8AO82O605EHGS5G';
     final appleSymbol = 'AAPL';
     final msftSymbol = 'MSFT';
 
@@ -48,7 +50,8 @@ class _CurrentStockPageState extends State<CurrentStockPage> {
       } else {
         setState(() {
           _isLoading = false;
-          _errorMessage = 'Error: ${appleResponse.statusCode} or ${msftResponse.statusCode}';
+          _errorMessage =
+          'Error: ${appleResponse.statusCode} or ${msftResponse.statusCode}';
         });
       }
     } catch (e) {
@@ -57,6 +60,14 @@ class _CurrentStockPageState extends State<CurrentStockPage> {
         _errorMessage = 'Error: $e';
       });
     }
+  }
+
+  Future<void> _refreshData() async {
+    setState(() {
+      _isLoading = true;
+      _errorMessage = '';
+    });
+    await fetchStockData();
   }
 
   Map<String, dynamic>? _getLatestStockData(Map<String, dynamic> data) {
@@ -78,37 +89,54 @@ class _CurrentStockPageState extends State<CurrentStockPage> {
         title: const Text('주식 현재가'),
         backgroundColor: Colors.black,
       ),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : _errorMessage.isNotEmpty
-          ? Center(child: Text(_errorMessage, style: const TextStyle(color: Colors.red)))
-          : SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                '애플 주식 현재가',
-                style: TextStyle(color: Colors.white, fontSize: 20),
-              ),
-              const SizedBox(height: 10),
-              _buildStockInfo('애플', appleStockData),
-              const SizedBox(height: 20),
-              const Text(
-                '마이크로소프트 주식 현재가',
-                style: TextStyle(color: Colors.white, fontSize: 20),
-              ),
-              const SizedBox(height: 10),
-              _buildStockInfo('마이크로소프트', msftStockData),
-            ],
+      body: RefreshIndicator(
+        key: _refreshIndicatorKey,
+        onRefresh: _refreshData,
+        child: _isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  '애플 주식 현재가',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                const SizedBox(height: 10),
+                _buildStockInfo('애플', appleStockData),
+                const SizedBox(height: 20),
+                const Text(
+                  '마이크로소프트 주식 현재가',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                const SizedBox(height: 10),
+                _buildStockInfo('마이크로소프트', msftStockData),
+                const SizedBox(height: 20),
+                if (_errorMessage.isNotEmpty)
+                  Center(
+                    child: Text(
+                      _errorMessage,
+                      style: const TextStyle(color: Colors.red),
+                    ),
+                  ),
+              ],
+            ),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _isLoading ? null : _refreshData,
+        tooltip: '새로고침',
+        backgroundColor: Colors.black, // 새로고침 버튼의 배경색을 검정색으로 설정
+        child: const Icon(Icons.refresh, color: Colors.white), // 아이콘의 색상을 흰색으로 설정
       ),
     );
   }
 
-  Widget _buildStockInfo(String company, Map<String, dynamic>? stockData) {
+  Widget _buildStockInfo(
+      String company, Map<String, dynamic>? stockData) {
     if (stockData == null) {
       return const Text(
         'No data available',
@@ -140,12 +168,12 @@ class _CurrentStockPageState extends State<CurrentStockPage> {
           const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
+            children: const [
+              Text(
                 '예상 등락',
                 style: TextStyle(color: Colors.white),
               ),
-              const Text(
+              Text(
                 '+2.99%', // 데이터를 가져와서 계산해야 함
                 style: TextStyle(color: Colors.red),
               ),

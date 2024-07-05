@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
       isLoading = true;
     });
 
-    final apiKey = 'G33Z7BXADP0BNI70';
+    final apiKey = 'A8AO82O605EHGS5G';
     final symbols = ['AAPL', 'MSFT']; // 코스피, 코스닥 심볼
 
     try {
