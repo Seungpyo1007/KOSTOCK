@@ -14,6 +14,7 @@ dependencies:
   firebase_auth: ^5.1.1
   google_sign_in: ^5.1.0
   cloud_firestore: ^5.0.2
+  provider: ^6.0.0
   http: ^1.2.1
   cupertino_icons: ^1.0.6
 
@@ -39,4 +40,5 @@ flutter:
     - assets/news_image_1.png
     - assets/news_image_2.png
     - assets/news_image_3.png
+    - assets/main_logo.png
   uses-material-design: true

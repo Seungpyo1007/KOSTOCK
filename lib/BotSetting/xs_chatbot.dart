@@ -58,40 +58,44 @@ class _XsChatbotPageState extends State<XsChatbotPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('동엽쌤 Style Chatbot'),
+        backgroundColor: Colors.red,
       ),
       body: Column(
         children: [
           Expanded(
             child: Stack(
               children: [
-                ListView.builder(
-                  reverse: true, // 채팅 내역을 역순으로 표시
-                  itemCount: _chatHistory.length,
-                  itemBuilder: (context, index) {
-                    final message = _chatHistory[index]['message'];
-                    final sender = _chatHistory[index]['sender'];
-                    final isUser = sender == 'User';
+                Container(
+                  color: Colors.black, // 배경색을 검정색으로 변경
+                  child: ListView.builder(
+                    reverse: true, // 채팅 내역을 역순으로 표시
+                    itemCount: _chatHistory.length,
+                    itemBuilder: (context, index) {
+                      final message = _chatHistory[index]['message'];
+                      final sender = _chatHistory[index]['sender'];
+                      final isUser = sender == 'User';
 
-                    return Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      child: Align(
-                        alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
-                        child: Container(
-                          padding: EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: isUser ? Colors.blueAccent : Colors.grey[300],
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Text(
-                            message!,
-                            style: TextStyle(
-                              color: isUser ? Colors.white : Colors.black,
+                      return Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        child: Align(
+                          alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
+                          child: Container(
+                            padding: EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: isUser ? Colors.blueAccent : Colors.grey[700],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              message!,
+                              style: TextStyle(
+                                color: Colors.white, // 모든 글씨 색상을 흰색으로 변경
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
                 if (_isLoading)
                   Center(
@@ -110,7 +114,8 @@ class _XsChatbotPageState extends State<XsChatbotPage> {
 
   Widget _buildInputField() {
     return Container(
-      margin: EdgeInsets.all(16),
+      color: Colors.black,
+      padding: EdgeInsets.all(16),
       child: Row(
         children: [
           Expanded(
@@ -118,17 +123,19 @@ class _XsChatbotPageState extends State<XsChatbotPage> {
               controller: _controller,
               decoration: InputDecoration(
                 hintText: 'Type your message...',
+                hintStyle: TextStyle(color: Colors.grey), // 힌트 텍스트 색상을 회색으로 변경
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(24),
                 ),
                 filled: true,
-                fillColor: Colors.grey[200],
+                fillColor: Colors.grey[800], // 입력창 배경색을 어두운 회색으로 변경
               ),
+              style: TextStyle(color: Colors.white), // 입력 텍스트 색상을 흰색으로 변경
             ),
           ),
           SizedBox(width: 16),
           IconButton(
-            icon: Icon(Icons.send),
+            icon: Icon(Icons.send, color: Colors.white), // 아이콘 색상을 흰색으로 변경
             onPressed: () {
               if (_controller.text.trim().isNotEmpty) {
                 _sendQuery(_controller.text);

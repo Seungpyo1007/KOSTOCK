@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'MainMenu/home_page.dart';
-import 'MainMenu/news_page.dart';
+import 'MainMenu/news_page.dart' as news_page;
 import 'MainMenu/interest_page.dart';
 import 'MainMenu/stock_order_page.dart';
 import 'MainMenu/my_assets_page.dart';
-import 'MainMenu/current_stock_page.dart';
+import 'MainMenu/current_stock_page.dart' as current_stock_page;
 
 void main() {
   runApp(const MyApp());
@@ -39,11 +39,11 @@ class _MainPageState extends State<MainPage> {
 
   final List<Widget> _pages = [
     const HomePage(),
-    const NewsPage(),
+    const news_page.NewsPage(),
     const InterestPage(),
     const StockOrderPage(),
     const MyAssetsPage(),
-    const CurrentStockPage(),
+    const current_stock_page.CurrentStockPage(),
   ];
 
   @override
@@ -58,7 +58,7 @@ class _MainPageState extends State<MainPage> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications, color: Colors.white),
+            icon: const Icon(Icons.notifications, color: Colors.red),
             onPressed: () {
               Navigator.push(
                 context,
@@ -82,7 +82,7 @@ class _MainPageState extends State<MainPage> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.menu, color: Colors.red),
-            label: '메뉴',
+            label: '홈',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.article, color: Colors.red),
@@ -118,7 +118,7 @@ class NotificationPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.red,
         title: const Text('최근 알림 내역', style: TextStyle(color: Colors.white)),
       ),
       body: Padding(

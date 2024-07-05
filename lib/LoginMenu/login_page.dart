@@ -188,7 +188,7 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(30.0),
                       side: const BorderSide(color: Colors.white),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 80.0),
+                    padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 60.0),
                   ),
                   child: const Text(
                     '이메일/비밀번호 로그인',
@@ -196,29 +196,38 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 12),
-                ElevatedButton.icon(
-                  onPressed: _signInWithGoogle,
-                  icon: Icon(Icons.g_translate),
-                  label: Text('구글 계정으로 로그인', style: TextStyle(color: Colors.white)),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton.icon(
+                        onPressed: _signInWithGoogle,
+                        icon: const Icon(Icons.g_translate),
+                        label: const Text('구글 로그인', style: TextStyle(color: Colors.white)),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
+                        ),
+                      ),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                ElevatedButton(
-                  onPressed: _signInAnonymously,
-                  child: Text('익명으로 로그인', style: TextStyle(color: Colors.white)),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey[600],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: _signInAnonymously,
+                        child: const Text('익명 로그인', style: TextStyle(color: Colors.white)),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.grey[600],
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
+                        ),
+                      ),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 80.0),
-                  ),
+                  ],
                 ),
               ],
             ),

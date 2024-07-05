@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 
 class MyAssetsPage extends StatelessWidget {
   const MyAssetsPage({super.key});
@@ -162,6 +163,25 @@ class MyPageTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
 
+    Future<void> _deleteAccount() async {
+      try {
+        // 재인증이 필요한 경우 처리
+        if (user != null) {
+          await user.delete();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('계정이 삭제되었습니다.')),
+          );
+          // 로그아웃하고 로그인 페이지로 이동
+          await FirebaseAuth.instance.signOut();
+          Navigator.of(context).pushReplacementNamed('/login'); // Replace with your login route
+        }
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('계정 삭제 중 오류가 발생했습니다: $e')),
+        );
+      }
+    }
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -220,7 +240,31 @@ class MyPageTab extends StatelessWidget {
             const SizedBox(height: 20),
             const Text('문의', style: TextStyle(color: Colors.white)),
             const SizedBox(height: 10),
-            const Text('탈퇴하기', style: TextStyle(color: Colors.red)),
+            GestureDetector(
+              onTap: () async {
+                final confirm = await showDialog<bool>(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('계정 삭제'),
+                    content: const Text('정말로 계정을 삭제하시겠습니까?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: const Text('취소'),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(true),
+                        child: const Text('확인'),
+                      ),
+                    ],
+                  ),
+                );
+                if (confirm == true) {
+                  _deleteAccount();
+                }
+              },
+              child: const Text('탈퇴하기', style: TextStyle(color: Colors.red)),
+            ),
           ],
         ),
       ),
