@@ -57,6 +57,10 @@ flutter run   # 에뮬레이터 또는 실기기 연결 후
 - **데이터 호출** → Alpha Vantage REST API를 `http` 패키지로 호출, 간단 파싱 후 표시.
 - **상태 관리** → 관심종목 즐겨찾기는 `Provider`로 메모리 내 관리(스토리지 미사용).
 
+## 다운로드
+- 최신 릴리스: [v0.0.1-alpha](https://github.com/Seungpyo1007/KOSTOCK/releases/tag/v0.0.1-alpha)
+- 모든 릴리스 보기: [Releases](https://github.com/Seungpyo1007/KOSTOCK/releases)
+
 ## 빌드/배포 참고
 - `pubspec.yaml`에 아이콘 경로(`assets/icon/icon_img.png`)가 설정되어 있으며 `flutter_launcher_icons`로 아이콘 생성 가능.
 - 릴리스 빌드시 각 플랫폼별 Firebase, 서명/프로비저닝 설정을 완료하세요.
